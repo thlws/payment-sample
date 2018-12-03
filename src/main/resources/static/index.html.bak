@@ -16,7 +16,9 @@
 </div>
 
 <div class="container">
-    <div class="card-deck mb-3 text-center">
+    <div class="card-deck text-center">
+
+
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
                 <h4 class="my-0 font-weight-normal">支付宝支付</h4>
@@ -28,9 +30,11 @@
                     <li>手机网站支付</li>
                     <li>支付订单退款</li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">查看示例</button>
+                <a class="btn btn-outline-primary" href="alipay/index" role="button">查看示例</a>
             </div>
         </div>
+
+
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
                 <h4 class="my-0 font-weight-normal">微信支付</h4>
@@ -42,9 +46,11 @@
                     <li>公众号支付</li>
                     <li>支付订单退款</li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">查看示例</button>
+                <a class="btn btn-outline-primary" href="wechat/index" role="button">查看示例</a>
             </div>
         </div>
+
+
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
                 <h4 class="my-0 font-weight-normal">翼支付</h4>
@@ -56,9 +62,11 @@
                     <li>支付订单撤销</li>
                     <li>支付订单退款</li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">查看示例</button>
+                <a class="btn btn-outline-primary" href="bestpay/index" role="button">查看示例</a>
             </div>
         </div>
+
+
     </div>
 
 </div>
