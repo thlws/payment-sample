@@ -57,12 +57,16 @@
             <artifactId>jstl</artifactId>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>org.thlws</groupId>
             <artifactId>payment-thl</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.7</version>
         </dependency>
 
 

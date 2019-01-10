@@ -12,12 +12,12 @@
 
 	function onBridgeReady() {
 		WeixinJSBridge.invoke('getBrandWCPayRequest', {
-			"appId" : '${appId}',
-			"timeStamp" : '${timeStamp}',   
-			"nonceStr" : '${nonceStr}',
-			"package" : '${packageStr}',
-			"signType" : '${signType}',   
-			"paySign" :  '${paySign}'
+			"appId" : '${mp.appId}',
+			"timeStamp" : '${mp.timeStamp}',
+			"nonceStr" : '${mp.nonceStr}',
+			"package" : '${mp.packageStr}',
+			"signType" : '${mp.signType}',
+			"paySign" :  '${mp.paySign}'
 		}, function(res) {
 			if (res.err_msg == "get_brand_wcpay_request:ok") {
 
