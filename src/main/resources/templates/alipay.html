@@ -3,6 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>支付宝支付</title>
+    <meta charset="UTF-8" />
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <script th:src="@{/js/jquery.slim.min.js}"></script>
     <script th:src="@{/js/popper.min.js}"></script>
@@ -15,23 +16,27 @@
     <script type="text/javascript">
         function action(type) {
             switch (type) {
-                case 1:
+                case 1://当面付
                     var amt1 = $("#amt1").val();
                     var barcode = $("#barcode").val();
                     window.location.href="/alipay/pay/f2f?amt="+amt1+"&barcode="+barcode;
                     break;
-                case 2:
+                case 2://电脑网站支付
                     var amt2 = $("#amt2").val();
                     window.location.href="/alipay/pay/web?amt="+amt2;
                     break;
-                case 3:
-                    var amt3 = $("#amt2").val();
-                    window.location.href="/alipay/pay/web?amt="+amt3;
+                case 3://手机网站支付
+                    var amt3 = $("#amt3").val();
+                    window.location.href="/alipay/pay/mobile?amt="+amt3;
                     break;
-                case 4:
-                    var amt = $("#amt").val();
-                    var outTradeNo = $("#out_trade_no").val();
-                    window.location.href="/alipay/refund?amt="+amt+"&out_trade_no="+outTradeNo;
+                case 4://查询
+                    var outTradeNo = $("#out_trade_no4").val();
+                    window.location.href="/alipay/query?out_trade_no="+outTradeNo;
+                    break;
+                case 5://退款
+                    var amt5 = $("#amt5").val();
+                    var outTradeNo = $("#out_trade_no5").val();
+                    window.location.href="/alipay/refund?amt="+amt5+"&out_trade_no="+outTradeNo;
                     break;
             }
         }
@@ -52,19 +57,14 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="col-6 form-inline ">
+                <div class="col-6">
 
-                    <div class="input-group mb-1">
+                    <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" >支付码</span>
+                            <span class="input-group-text">支付码|金额</span>
                         </div>
-                        <input type="text" id="barcode" class="form-control" placeholder="输入支付码" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">金额</span>
-                        </div>
-                        <input id="amt1" type="text" class="form-control" value="0.01" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id="barcode" type="text" placeholder="单号" value="1547461145819" aria-label="单号" class="form-control">
+                        <input id="amt1" type="text" placeholder="金额" value="0.01" aria-label="金额" class="form-control">
                     </div>
                 </div>
                 <div class="col-6">
@@ -124,33 +124,50 @@
 
     <div class="card  mb-3">
         <div class="card-header">
+            支付订单查询
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" >外部单号</span>
+                        </div>
+                        <input id="out_trade_no4" type="text" class="form-control" value="1547461145819" aria-label="外部单号" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <button onclick="action(4)" class="btn btn-primary btn-warning  btn-block">查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card  mb-3">
+        <div class="card-header">
             支付订单退款
         </div>
         <div class="card-body">
 
 
             <div class="row">
-                <div class="col-6 form-inline ">
-
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">单号</span>
-                        </div>
-                        <input type="text" id="out_trade_no" class="form-control" placeholder="out_trade_no" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" >金额</span>
-                        </div>
-                        <input id="amt" type="text" class="form-control" value="0.01" aria-label="退款金额" aria-describedby="basic-addon1">
-                    </div>
-                </div>
                 <div class="col-6">
-                    <button onclick="action(4)" class="btn btn-primary btn-warning  btn-block"> 开始退款</button>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">单号|金额</span>
+                        </div>
+                        <input id="out_trade_no5" type="text" placeholder="单号" value="1547461145819" aria-label="单号" class="form-control">
+                        <input id="amt5" type="text" placeholder="金额" value="0.01" aria-label="金额" class="form-control">
+                    </div>
+
+                </div>
+
+                <div class="col-6">
+                    <button onclick="action(5)" class="btn btn-primary btn-warning  btn-block">退款</button>
                 </div>
             </div>
-
-
         </div>
     </div>
 

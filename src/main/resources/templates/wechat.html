@@ -17,21 +17,21 @@
     <script type="text/javascript">
         function action(type) {
             switch (type) {
-                case 1:
+                case 1://刷卡支付
                     var amt1 = $("#amt1").val();
                     var barcode = $("#barcode").val();
                     window.location.href="/wechat/pay/micro_pay?amt="+amt1+"&barcode="+barcode;
                     break;
-                case 2:
+                case 2://扫码支付
                     var amt2 = $("#amt2").val();
                     window.location.href="/wechat/pay/qrcode?amt="+amt2;
                     break;
-                case 3:
-                    var amt3 = $("#amt2").val();
+                case 3://公众号支付
+                    var amt3 = $("#amt3").val();
                     window.location.href="/wechat/pay/mp?amt="+amt3;
                     break;
-                case 4:
-                    var amt = $("#amt").val();
+                case 4://退款
+                    var amt = $("#amt4").val();
                     var outTradeNo = $("#out_trade_no").val();
                     window.location.href="/wechat/refund?amt="+amt+"&out_trade_no="+outTradeNo;
                     break;
@@ -54,21 +54,18 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="col-6 form-inline ">
 
-                    <div class="input-group mb-1">
+
+                <div class="col-6">
+                    <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" >支付码</span>
+                            <span class="input-group-text">条码|金额</span>
                         </div>
-                        <input type="text" id="barcode" class="form-control" placeholder="输入支付码" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">金额</span>
-                        </div>
-                        <input id="amt1" type="text" class="form-control" placeholder="0.01" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id="barcode" type="text" placeholder="条码" value="0.01" aria-label="单号" class="form-control">
+                        <input id="amt1" type="text" placeholder="金额" value="" aria-label="金额" class="form-control">
                     </div>
                 </div>
+
                 <div class="col-6">
                     <button onclick="action(1)" class="btn btn-primary btn-success  btn-block"> 刷卡支付</button>
                 </div>
@@ -131,21 +128,17 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="col-6 form-inline ">
 
-                    <div class="input-group mb-1">
+                <div class="col-6">
+                    <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">单号</span>
+                            <span class="input-group-text">单号|金额</span>
                         </div>
-                        <input type="text" id="out_trade_no" class="form-control" placeholder="out_trade_no" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" >金额</span>
-                        </div>
-                        <input id="amt" type="text" class="form-control" placeholder="0.01" aria-label="退款金额" aria-describedby="basic-addon1">
+                        <input id="out_trade_no" type="text" placeholder="条码" value="" aria-label="单号" class="form-control">
+                        <input id="amt4" type="text" placeholder="金额" value="" aria-label="金额" class="form-control">
                     </div>
                 </div>
+
                 <div class="col-6">
                     <button onclick="action(4)" class="btn btn-primary btn-success  btn-block"> 开始退款</button>
                 </div>
