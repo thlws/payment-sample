@@ -61,7 +61,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">条码|金额</span>
                         </div>
-                        <input id="barcode" type="text" placeholder="条码" value="0.01" aria-label="单号" class="form-control">
+                        <input id="barcode" type="text" placeholder="条码" aria-label="单号" class="form-control">
                         <input id="amt1" type="text" placeholder="金额" value="" aria-label="金额" class="form-control">
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">输入金额</span>
                         </div>
-                        <input type="text" id="amt2" class="form-control" placeholder="0.01" aria-label="输入金额" aria-describedby="basic-addon1">
+                        <input type="text" id="amt2" class="form-control" placeholder="金额" aria-label="输入金额" aria-describedby="basic-addon1">
                     </div>
                 </div>
                 <div class="col-6">
@@ -109,11 +109,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">输入金额</span>
                         </div>
-                        <input type="text" id="amt3" class="form-control" placeholder="0.01" aria-label="输入金额" aria-describedby="basic-addon1">
+
+                        <input type="text" id="amt3" class="form-control" placeholder="金额" aria-label="输入金额" aria-describedby="basic-addon1">
                     </div>
                 </div>
                 <div class="col-6">
-                    <button onclick="action(3)" class="btn btn-primary btn-success  btn-block">公众号支付</button>
+                    <button onclick="action(3)" class="btn btn-primary btn-success  btn-block" disabled>公众号支付(<span style="font-size: 10px;">调整后台代码后自行启用</span>)</button>
                 </div>
             </div>
 
@@ -134,13 +135,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">单号|金额</span>
                         </div>
-                        <input id="out_trade_no" type="text" placeholder="条码" value="" aria-label="单号" class="form-control">
+                        <input id="out_trade_no" type="text" placeholder="单号" value="" aria-label="单号" class="form-control">
                         <input id="amt4" type="text" placeholder="金额" value="" aria-label="金额" class="form-control">
                     </div>
                 </div>
 
                 <div class="col-6">
-                    <button onclick="action(4)" class="btn btn-primary btn-success  btn-block"> 开始退款</button>
+                    <button onclick="action(4)" class="btn btn-primary btn-success  btn-block" disabled> 开始退款(<span style="font-size: 10px;">调整后台代码后自行启用</span>)</button>
                 </div>
             </div>
 
