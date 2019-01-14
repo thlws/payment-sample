@@ -3,10 +3,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>微信支付</title>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/js/jquery.slim.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
     <style>
         body{
             padding: 20px;
@@ -40,9 +41,9 @@
 </head>
 <body>
 
-<div>
+<div class="container">
 
-    <div class="alert alert-primary text-center" role="alert">
+    <div class="alert alert-success text-center" role="alert">
         微信支付 示例
     </div>
 
@@ -51,8 +52,27 @@
             刷卡支付
         </div>
         <div class="card-body">
-            <input placeholder="输入支付码" id="barcode"  />
-            <input placeholder="输入金额" id="amt1" value="0.01" readonly  /><button onclick="action(1)"> 刷卡支付</button>
+
+            <div class="row">
+                <div class="col-6 form-inline ">
+
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" >支付码</span>
+                        </div>
+                        <input type="text" id="barcode" class="form-control" placeholder="输入支付码" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">金额</span>
+                        </div>
+                        <input id="amt1" type="text" class="form-control" placeholder="0.01" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <button onclick="action(1)" class="btn btn-primary btn-success  btn-block"> 刷卡支付</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -61,7 +81,22 @@
             扫码支付
         </div>
         <div class="card-body">
-            <input placeholder="输入金额" id="amt2" value="0.01" readonly  /><button onclick="action(2)">扫码支付</button>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">输入金额</span>
+                        </div>
+                        <input type="text" id="amt2" class="form-control" placeholder="0.01" aria-label="输入金额" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <button onclick="action(2)" class="btn btn-primary btn-success btn-block">扫码支付</button>
+                </div>
+            </div>
+
+
         </div>
     </div>
 
@@ -70,7 +105,21 @@
             公众号支付
         </div>
         <div class="card-body">
-            <input placeholder="输入金额" id="amt3" value="0.01" readonly  /><button onclick="action(3)">公众号支付</button>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">输入金额</span>
+                        </div>
+                        <input type="text" id="amt3" class="form-control" placeholder="0.01" aria-label="输入金额" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <button onclick="action(3)" class="btn btn-primary btn-success  btn-block">公众号支付</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -80,8 +129,28 @@
             支付订单退款
         </div>
         <div class="card-body">
-            <input placeholder="外部单号(out_trade_no)" id="out_trade_no" value="" />
-            <input placeholder="输入金额" id="amt" value="0.01" readonly /><button onclick="action(4)">开始退款</button>
+
+            <div class="row">
+                <div class="col-6 form-inline ">
+
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">单号</span>
+                        </div>
+                        <input type="text" id="out_trade_no" class="form-control" placeholder="out_trade_no" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" >金额</span>
+                        </div>
+                        <input id="amt" type="text" class="form-control" placeholder="0.01" aria-label="退款金额" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <button onclick="action(4)" class="btn btn-primary btn-success  btn-block"> 开始退款</button>
+                </div>
+            </div>
+
         </div>
     </div>
 

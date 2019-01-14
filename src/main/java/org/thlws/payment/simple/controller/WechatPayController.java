@@ -76,6 +76,7 @@ public class WechatPayController {
 
     /**
      * 刷卡支付
+     * 一般不会在网站上使用这种付款方式,“刷卡支付” 适用于线下POS软件,使用扫描枪完成付款.
      *
      * @param amt     the amt
      * @param barcode the barcode
@@ -115,7 +116,7 @@ public class WechatPayController {
     /**
      * 需要异步处理,流程无法完整演示
      *
-     * 扫描支付,官方叫native
+     * 扫描支付,官方叫native，这里直接返回二维码支付图片,用户完成支付后微信会发送异步付款通知，是否完成付款以“微信异步通知”为准.
      *
      * @param amt the amt
      * @return the object
@@ -151,10 +152,11 @@ public class WechatPayController {
             }
             imgPath.append(prepayId).append(".png");
 
+            //产生付款二维码
             ZxingUtil.qrCode(250,250,imageContent,"png",imgPath.toString());
 
+            //付款二维码返回到浏览器
             File img = new File(imgPath.toString());
-
             FileInputStream inputStream = new FileInputStream(img);
             byte[] bytes = new byte[inputStream.available()];
             inputStream.read(bytes, 0, inputStream.available());
@@ -193,11 +195,11 @@ public class WechatPayController {
             // 2.WechatMpClient.generateWechatUrl(String appId, AuthorizeType scope, String callback, String bizData)
             // 3.得到openIdUrl后，返回到用户页面端，由用户发起请求,微信会自动回调我们填写的callback地址
             // 4.在回调地址callback中调用 WechatMpClient.obtainOauthAccessToken 就能得到openId，然后存储OpenId 下次付款就不用再获取了.
+            // 示例:
             // String callback = "微信回调地址"; 比如: http://wwww.xxx.com/wechat/openid
             // String bizData = "业务数据";//这里任意填写,最好使用有意义的值,在回调处理中可以得到微信参数.
             // String openIdUrl = WechatMpClient.generateWechatUrl(config.getAppid(), AuthorizeType.snsapi_base,callback,bizData);
-            // return Result.ok("", DataType.url.value);
-
+            // return Result.ok(openIdUrl, DataType.url.value); 将URL返回到前端,有前端完成页面跳转.
 
             BigDecimal amount = new BigDecimal(amt);//测试金额
             BigDecimal wechatAmt = amount.movePointRight(2);//微信单位为分，实际金额x100
@@ -222,7 +224,7 @@ public class WechatPayController {
 
             modelMap.addAttribute("mp", mPayment);
 
-            //返回 支付数据, 如果是前后端分离的情况,需直接返回JSON格式支付数据,有前端开发人员处理.
+            //返回 支付数据, 如果是前后端分离的情况,需直接返回JSON格式支付数据,由前端开发人员处理.
             //return Result.ok(mPayment);
 
             //这里并非前后端分离方式,直接返回支付页面进行支付
@@ -237,7 +239,7 @@ public class WechatPayController {
 
 
     /**
-     * 退款接口
+     * 退款接口,适用所有付款方式的退款流程
      *
      * @param amt        the amt
      * @param outTradeNo the out trade no
@@ -249,6 +251,7 @@ public class WechatPayController {
                          @RequestParam(name = "out_trade_no")String outTradeNo){
 
         try {
+            //这里一定要p12文件位置,该文件不存在或错误不能完成退款
             String p12FilePath = "微信p12秘钥文件";//
 
             log.debug("微信[退款]测试开始-WechatPayClient.refund");
@@ -276,8 +279,15 @@ public class WechatPayController {
 
 
     /**
-     * 得到OpenId.
+     * 得到OpenId，必须在公众号中获取.
+     * 另有一种 扫描用户付款码得OpenId的接口,参考{@link WechatPayClient#openidQuery} ,但两者适用场景不一样.
+     *  1.公众号中取OpenId
+     *  这种方式适用于公众号发起微信支付,openId是必须参数,首次获取后需要存储到业务系统,不用每次都获取.
      *
+     *  2.扫描得openId
+     *  适用于业务系统以openId查询会员数据情况(openId与会员有绑定行为),得到openId后查询业务系统能得到用户数据.
+     *
+     *  如上两种方式,同一个用户在同一个appId下得到的openId是一样的.
      * @param request the request
      * @return the object
      */
@@ -290,6 +300,7 @@ public class WechatPayController {
             String bizData = request.getParameter("state");
 
             //FIXME 根据 bizData 得到 appId ,secret
+            //FIXME bizData 是
             String appId="";
             String secret = "";
 

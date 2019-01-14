@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>翼支付</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/js/jquery.slim.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script type="text/javascript">
+        function action(type) {
+            switch (type) {
+                case 1://支付
+                    var amt1 = $("#amt1").val();
+                    var barcode = $("#barcode").val();
+                    window.location.href="/bestpay/pay?amt="+amt1+"&barcode="+barcode;
+                    break;
+                case 2://查询
+                    var orderNo1 = $("#orderNo1").val();
+                    var reqNo1 = $("#reqNo1").val();
+                    window.location.href="/bestpay/query?orderNo="+orderNo1+"&reqNo="+reqNo1;
+                    break;
+                case 3://撤销
+                    var amt2 = $("#amt2").val();
+                    var orderNo2 = $("#orderNo2").val();
+                    var reqNo2 = $("#reqNo2").val();
+                    window.location.href="/bestpay/reverse?orderNo="+orderNo2+"&reqNo="+reqNo2+"&amt="+amt2;
+                    break;
+                case 4://退款
+                    var amt = $("#amt3").val();
+                    var orderNo3 = $("#orderNo3").val();
+                    var reqNo3 = $("#reqNo3").val();
+                    window.location.href="/bestpay/refund?amt="+amt+"&orderNo="+orderNo3+"&reqNo="+reqNo3;
+                    break;
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <div class="alert alert-danger text-center" role="alert">
+        翼支付 示例
+    </div>
+
+    <div class="card  mb-3">
+        <div class="card-header">
+            刷卡支付
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-9 form-inline ">
+
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" >条码</span>
+                        </div>
+                        <input type="text" id="barcode" class="form-control" value="510423705266148241" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">金额</span>
+                        </div>
+                        <input id="amt1" type="text" class="form-control" value="0.01"  aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button onclick="action(1)" class="btn btn-primary btn-danger btn-block"> 刷卡支付</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card  mb-3">
+        <div class="card-header">
+            支付信息查询
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-9 form-inline">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">单号</span>
+                        </div>
+                        <input type="text" id="orderNo1" class="form-control" value="14fd85d7c2484b0681f3958f1808c0ca"   aria-label="输入单号" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">流水号</span>
+                        </div>
+                        <input type="text" id="reqNo1" class="form-control" value="9798f51879784f878774171e1c854c5f"   aria-label="输入单号" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button onclick="action(2)" class="btn btn-primary btn-danger btn-block">查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card  mb-3">
+        <div class="card-header">
+            支付订单撤销
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-9 form-inline">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">金额</span>
+                        </div>
+                        <input id="amt2" type="text" class="form-control" value="0.01"  aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">单号</span>
+                        </div>
+                        <input type="text" id="orderNo2" class="form-control" value="14fd85d7c2484b0681f3958f1808c0ca"  aria-label="支付单号" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">流水号</span>
+                        </div>
+                        <input id="reqNo2" type="text" class="form-control" value="9798f51879784f878774171e1c854c5f"  aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button onclick="action(3)" class="btn btn-primary btn-danger btn-block">撤销</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card  mb-3">
+        <div class="card-header">
+            支付订单退款
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-9 form-inline">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">金额</span>
+                        </div>
+                        <input type="text" id="amt3" class="form-control" value="0.01"  aria-label="输入金额" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">单号</span>
+                        </div>
+                        <input id="orderNo3" type="text" class="form-control" value="14fd85d7c2484b0681f3958f1808c0ca"  aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">流水号</span>
+                        </div>
+                        <input id="reqNo3" type="text" class="form-control" value="9798f51879784f878774171e1c854c5f"  aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button onclick="action(4)" class="btn btn-primary btn-danger btn-block">退款</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
