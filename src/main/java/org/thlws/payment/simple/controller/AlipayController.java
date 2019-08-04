@@ -141,6 +141,7 @@ public class AlipayController {
             AlipayWebSiteRequest request = new AlipayWebSiteRequest();
             request.setNotifyUrl("http://你的异步处理地址/alipay/notify_mobile");
             request.setReturnUrl("http://你的同步处理地址/alipay/alipay_sync_web");
+
             AlipayWebSiteRequest.BizContent bizContent = new AlipayWebSiteRequest.BizContent();
             bizContent.setTotalAmount(amt);
             bizContent.setSubject("测试电脑网站支付");
