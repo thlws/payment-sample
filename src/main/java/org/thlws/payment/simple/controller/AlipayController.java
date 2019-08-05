@@ -85,7 +85,7 @@ public class AlipayController {
     }
 
     /**
-     * 手机网站支付. FIXME 暂不可用
+     * 手机网站支付.
      * 在手机浏览器打开(不能在微信中)完成付款动作.
      *
      * @param amt      the amt
@@ -124,7 +124,7 @@ public class AlipayController {
 
     //http://你的异步处理地址/alipay/notify_mobile
     /**
-     * 电脑网站支付.FIXME 暂不可用
+     * 电脑网站支付.
      *
      * @param amt      the amt
      * @param modelMap the model map
@@ -181,7 +181,8 @@ public class AlipayController {
                     .setPrivateKey(alipayConfig.getPrivate_key())
                     .setSignType(AlipayConstants.SIGN_TYPE_RSA2).build();
 
-            AlipayQueryResponse response = AlipayClient.query(outTradeNo,alipayCore);
+
+            AlipayQueryResponse response = AlipayClient.query(outTradeNo, alipayCore);
             return response;
         } catch (Exception e) {
             log.error("支付宝查询失败.",e);
@@ -203,10 +204,11 @@ public class AlipayController {
                     .setSignType(AlipayConstants.SIGN_TYPE_RSA2).build();
 
             AlipayRefundRequest request = new AlipayRefundRequest();
-            request.setTradeNo(outTradeNo);
+            request.setOutTradeNo(outTradeNo);
             request.setRefundAmount(amt);
             request.setRefundReason("测试退款");
-            AlipayRefundResponse response = AlipayClient.refund(request,alipayCore);
+            request.setOutRequestNo(System.currentTimeMillis() + "");
+            AlipayRefundResponse response = AlipayClient.refund(request, alipayCore);
             return response;
         } catch (Exception e) {
             log.error("支付宝退款失败.",e);
