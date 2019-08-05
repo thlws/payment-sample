@@ -1,7 +1,7 @@
 package org.thlws.payment.simple.controller;
 
+import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.NetUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
