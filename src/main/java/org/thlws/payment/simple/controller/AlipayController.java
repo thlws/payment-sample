@@ -107,12 +107,11 @@ public class AlipayController {
             request.setNotifyUrl(null);
 
             //http://你的同步处理地址/alipay/alipay_sync_mobile
-            request.setReturnUrl("http://localhost:7171/alipay/alipay_sync_mobile");
+            request.setReturnUrl("http://39.105.94.70:7171/alipay/alipay_sync_mobile");
             AlipayMobileSiteRequest.BizContent bizContent = new AlipayMobileSiteRequest.BizContent();
             bizContent.setTotalAmount(amt);
             bizContent.setSubject("测试H5(手机网页)支付");
 //            bizContent.setSeller_id(partner_id);
-            bizContent.setProductCode("QUICK_WAP_WAY");
             bizContent.setOutTradeNo(System.currentTimeMillis()+"");
             request.setBizContent(bizContent);
             String html = AlipayClient.payInMobileSite(request,alipayCore);
@@ -147,14 +146,14 @@ public class AlipayController {
             //request.setNotifyUrl("http://你的异步处理地址/alipay/notify_mobile");
             request.setNotifyUrl(null);
 
-            request.setReturnUrl("http://localhost:7171/alipay/alipay_sync_web");
+            request.setReturnUrl("http://39.105.94.70:7171/alipay/alipay_sync_web");
 
             AlipayWebSiteRequest.BizContent bizContent = new AlipayWebSiteRequest.BizContent();
             bizContent.setTotalAmount(amt);
             bizContent.setSubject("测试电脑网站支付");
             bizContent.setBody("测试");
-            bizContent.setProductCode("FAST_INSTANT_TRADE_PAY");
             bizContent.setOutTradeNo(System.currentTimeMillis()+"");
+            request.setBizContent(bizContent);
             String html = AlipayClient.payInWebSite(request,alipayCore);
             modelMap.addAttribute("form", html);
 
@@ -229,7 +228,8 @@ public class AlipayController {
         Enumeration<String> its = request.getParameterNames();
         while (its.hasMoreElements()){
             String name = its.nextElement();
-            System.out.println("name = [" + name + "]");
+            String value = request.getParameter(name);
+            log.info(name+"="+value);
         }
         System.out.println("================sync_mobile===================");
         return "alipay/alipay_sync_mobile";
@@ -245,7 +245,8 @@ public class AlipayController {
         Enumeration<String> its = request.getParameterNames();
         while (its.hasMoreElements()){
             String name = its.nextElement();
-            System.out.println("name = [" + name + "]");
+            String value = request.getParameter(name);
+            log.info(name+"="+value);
         }
         System.out.println("===============sync_web====================");
         return "alipay/alipay_sync_web";
