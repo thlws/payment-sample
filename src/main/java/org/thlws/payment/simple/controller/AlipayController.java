@@ -104,13 +104,15 @@ public class AlipayController {
                     .setSignType(AlipayConstants.SIGN_TYPE_RSA2).build();
 
             AlipayMobileSiteRequest request = new AlipayMobileSiteRequest();
-            request.setNotifyUrl("http://你的异步处理地址/alipay/notify_mobile");
-            request.setReturnUrl("http://你的同步处理地址/alipay/alipay_sync_mobile");
+            request.setNotifyUrl(null);
+
+            //http://你的同步处理地址/alipay/alipay_sync_mobile
+            request.setReturnUrl("http://localhost:7171/alipay/alipay_sync_mobile");
             AlipayMobileSiteRequest.BizContent bizContent = new AlipayMobileSiteRequest.BizContent();
             bizContent.setTotalAmount(amt);
             bizContent.setSubject("测试H5(手机网页)支付");
-            //bizContent.setSeller_id(partner_id);
-            bizContent.setProductCode("p0001");
+//            bizContent.setSeller_id(partner_id);
+            bizContent.setProductCode("QUICK_WAP_WAY");
             bizContent.setOutTradeNo(System.currentTimeMillis()+"");
             request.setBizContent(bizContent);
             String html = AlipayClient.payInMobileSite(request,alipayCore);
@@ -121,6 +123,7 @@ public class AlipayController {
         return "alipay/alipay_mobile";
     }
 
+    //http://你的异步处理地址/alipay/notify_mobile
     /**
      * 电脑网站支付.FIXME 暂不可用
      *
@@ -139,14 +142,18 @@ public class AlipayController {
                     .setSignType(AlipayConstants.SIGN_TYPE_RSA2).build();
 
             AlipayWebSiteRequest request = new AlipayWebSiteRequest();
-            request.setNotifyUrl("http://你的异步处理地址/alipay/notify_mobile");
-            request.setReturnUrl("http://你的同步处理地址/alipay/alipay_sync_web");
+
+            //http://你的异步处理地址/alipay/notify_mobile
+            //request.setNotifyUrl("http://你的异步处理地址/alipay/notify_mobile");
+            request.setNotifyUrl(null);
+
+            request.setReturnUrl("http://localhost:7171/alipay/alipay_sync_web");
 
             AlipayWebSiteRequest.BizContent bizContent = new AlipayWebSiteRequest.BizContent();
             bizContent.setTotalAmount(amt);
             bizContent.setSubject("测试电脑网站支付");
             bizContent.setBody("测试");
-            bizContent.setProductCode("p0001");
+            bizContent.setProductCode("FAST_INSTANT_TRADE_PAY");
             bizContent.setOutTradeNo(System.currentTimeMillis()+"");
             String html = AlipayClient.payInWebSite(request,alipayCore);
             modelMap.addAttribute("form", html);
