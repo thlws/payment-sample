@@ -1,7 +1,7 @@
 # 支付示例
 
 ![](img/thldemo.png)
-- 在线Demo  [http://39.105.94.70:7171/](http://39.105.94.70:7171/)
+- 在线Demo  [http://39.105.94.70:7171/ 暂不可用](http://39.105.94.70:7171/)
 - Github   [https://github.com/thlws/payment-thl](https://github.com/thlws/payment-thl)
 - Gitee    [https://gitee.com/thlws/payment-thl](https://gitee.com/thlws/payment-thl)
 
